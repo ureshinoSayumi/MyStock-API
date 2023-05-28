@@ -8,24 +8,25 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 const postRouter = require('./routes/posts');
+const stockRouter = require('./routes/stock');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv')
 dotenv.config({ path: './config.env'})
 
-const DB = process.env.DATABASE.replace(
-    '<password>',
-    process.env.DATABASE_PASSWORD
-)
+// const DB = process.env.DATABASE.replace(
+//     '<password>',
+//     process.env.DATABASE_PASSWORD
+// )
 console.log(process.env.PORT)
 
 // // 連接資料庫
-mongoose.connect(DB)
-    .then(()=>{
-        console.log('資料庫連線成功')
-    })
-    .catch((error)=>{
-        console.log(error);
-    });
+// mongoose.connect(DB)
+//     .then(()=>{
+//         console.log('資料庫連線成功')
+//     })
+//     .catch((error)=>{
+//         console.log(error);
+//     });
 
 app.use(cors())
 app.use(logger('dev'));
@@ -37,7 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postRouter);
+app.use('/stock', stockRouter);
 
 
 module.exports = app;
-// console.log('http://127.0.0.1:3005/');
+console.log('http://127.0.0.1:3005/');
